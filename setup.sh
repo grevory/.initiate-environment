@@ -1,9 +1,29 @@
+
+# Install Git and Curl
+apt-get install -y git-core curl
+
 # Collect parameters
 echo "Enter your name:"
 read name
+git config --global user.name "$name"
+
 echo "Enter your email:"
 read email
+git config --global user.email "$email"
+
+# Install Sublime Text 3
+# Ask for permission (may not be a GUI environment)
 read -p "Would you like to install Sublime? (y/n) " RESP
+if [ "$RESP" = "y" ]; then
+  # Grab the repo and install Sublime
+  add-apt-repository ppa:webupd8team/sublime-text-3 -y
+  apt-get update
+  apt-get install -y sublime-text-installer
+  # Copy over the config options and snippets
+  if [ -d Sublime ]; then
+    cp -r Sublime ~/.config/sublime-text-3/Packages/User/
+  fi
+fi
 
 # Install Node and NPM
 add-apt-repository ppa:chris-lea/node.js -y
@@ -24,12 +44,6 @@ apt-get -y install apache2 php5-cli
 apt-get install -y libapache2-mod-php5 php5-mysql php5-curl libxml2-dev libcurl4-openssl-dev php5-gd libmcrypt-dev libltdl-dev openssl
 apt-get install -y mysql-server
 
-# Install Git and Curl
-apt-get install -y git-core curl
-
-git config --global user.name "$name"
-git config --global user.email "$email"
-
 # Install jshint to allow linting of JS code
 # http://jshint.com/
 npm install -g jshint
@@ -37,19 +51,6 @@ npm install -g jshint
 # Install Heroku toolbelt
 # https://toolbelt.heroku.com/debian
 wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
-
-# Install Sublime Text 3
-# Ask for permission (may not be a GUI environment)
-if [ "$RESP" = "y" ]; then
-  # Grab the repo and install Sublime
-  add-apt-repository ppa:webupd8team/sublime-text-3 -y
-  apt-get update
-  apt-get install -y sublime-text-installer
-  # Copy over the config options and snippets
-  if [ -d Sublime ]; then
-    cp -r Sublime ~/.config/sublime-text-3/Packages/User/
-  fi
-fi
 
 # Move the bash config files
 cp .bash* ~/
