@@ -1,3 +1,10 @@
+# Collect parameters
+echo "Enter your name:"
+read name
+echo "Enter your email:"
+read email
+read -p "Would you like to install Sublime? (y/n) " RESP
+
 # Install Node and NPM
 add-apt-repository ppa:chris-lea/node.js -y
 apt-get update
@@ -20,11 +27,6 @@ apt-get install -y mysql-server
 # Install Git and Curl
 apt-get install -y git-core curl
 
-echo "Enter your name:"
-read name
-echo "Enter your email:"
-read email
-
 git config --global user.name "$name"
 git config --global user.email "$email"
 
@@ -38,7 +40,6 @@ wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
 # Install Sublime Text 3
 # Ask for permission (may not be a GUI environment)
-read -p "Would you like to install Sublime? (y/n) " RESP
 if [ "$RESP" = "y" ]; then
   # Grab the repo and install Sublime
   add-apt-repository ppa:webupd8team/sublime-text-3 -y
