@@ -10,6 +10,8 @@ git config --global user.name "$name"
 echo "Enter your email:"
 read email
 git config --global user.email "$email"
+# Create a coloured, branch-based git log alias
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 # Install Sublime Text 3
 # Ask for permission (may not be a GUI environment)
